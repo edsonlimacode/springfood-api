@@ -1,0 +1,71 @@
+package com.springfood.api.controller;
+
+
+import com.springfood.api.dto.group.GroupRequestDto;
+import com.springfood.api.dto.group.GroupResponseDto;
+import com.springfood.api.mapper.group.GroupMapper;
+import com.springfood.domain.model.Group;
+import com.springfood.domain.service.GroupService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/groups")
+public class GroupController {
+
+    @Autowired
+    private GroupService groupService;
+
+    @Autowired
+    private GroupMapper mapper;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void save( @Valid @RequestBody GroupRequestDto groupRequestDto) {
+
+        Group group = this.mapper.toModel(groupRequestDto);
+
+        this.groupService.create(group);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<GroupResponseDto> update(@PathVariable Long id, @Valid @RequestBody GroupRequestDto groupRequestDto) {
+
+        Group group = this.mapper.toModel(groupRequestDto);
+        Group groupUpdated = this.groupService.update(id, group);
+
+        GroupResponseDto groupResponseDto = this.mapper.toDto(groupUpdated);
+
+        return ResponseEntity.ok(groupResponseDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<GroupResponseDto>> list() {
+        List<Group> groups = this.groupService.listAll();
+
+        List<GroupResponseDto> groupResponseDtoList = this.mapper.toListDto(groups);
+
+        return ResponseEntity.ok(groupResponseDtoList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GroupResponseDto> findOne(@PathVariable Long id) {
+        Group group = this.groupService.findById(id);
+
+        GroupResponseDto groupResponseDto = this.mapper.toDto(group);
+
+        return ResponseEntity.ok(groupResponseDto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        this.groupService.delete(id);
+    }
+
+}
