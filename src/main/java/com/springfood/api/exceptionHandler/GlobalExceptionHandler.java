@@ -91,6 +91,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ProblemType problemType = ProblemType.TYPE_FORBIDEN;
 
         ProblemDetails problemDetails = getProblemDetails(problemType, status, "Você não tem permissão para acessar este recurso")
+                .userMessage(e.getMessage())
                 .build();
 
         return this.handleExceptionInternal(e, problemDetails, new HttpHeaders(), status, request);

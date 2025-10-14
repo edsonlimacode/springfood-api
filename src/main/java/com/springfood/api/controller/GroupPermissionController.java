@@ -39,7 +39,7 @@ public class GroupPermissionController {
     @PutMapping("/{permissionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void bindPermissionToRestaurant(@PathVariable Long id, @PathVariable Long permissionId) {
-        this.groupPermissionService.bindPermissionToGroup(id, permissionId);
+        this.groupPermissionService.attachPermissionToGroup(id, permissionId);
     }
 
     @CheckSecurity.AdminAndMaster
