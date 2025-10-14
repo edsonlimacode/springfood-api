@@ -4,6 +4,7 @@ package com.springfood.api.controller;
 import com.springfood.api.dto.group.GroupRequestDto;
 import com.springfood.api.dto.group.GroupResponseDto;
 import com.springfood.api.mapper.group.GroupMapper;
+import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Group;
 import com.springfood.domain.service.GroupService;
 import jakarta.validation.Valid;
@@ -24,6 +25,7 @@ public class GroupController {
     @Autowired
     private GroupMapper mapper;
 
+    @CheckSecurity.Master
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void save( @Valid @RequestBody GroupRequestDto groupRequestDto) {
@@ -33,6 +35,7 @@ public class GroupController {
         this.groupService.create(group);
     }
 
+    @CheckSecurity.Master
     @PutMapping("/{id}")
     public ResponseEntity<GroupResponseDto> update(@PathVariable Long id, @Valid @RequestBody GroupRequestDto groupRequestDto) {
 
@@ -44,6 +47,7 @@ public class GroupController {
         return ResponseEntity.ok(groupResponseDto);
     }
 
+    @CheckSecurity.AdminAndMaster
     @GetMapping
     public ResponseEntity<List<GroupResponseDto>> list() {
         List<Group> groups = this.groupService.listAll();
@@ -53,6 +57,7 @@ public class GroupController {
         return ResponseEntity.ok(groupResponseDtoList);
     }
 
+    @CheckSecurity.AdminAndMaster
     @GetMapping("/{id}")
     public ResponseEntity<GroupResponseDto> findOne(@PathVariable Long id) {
         Group group = this.groupService.findById(id);
@@ -62,6 +67,7 @@ public class GroupController {
         return ResponseEntity.ok(groupResponseDto);
     }
 
+    @CheckSecurity.Master
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {

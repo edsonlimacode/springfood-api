@@ -3,6 +3,7 @@ package com.springfood.api.controller;
 
 import com.springfood.api.dto.permission.PermissionResponseDto;
 import com.springfood.api.mapper.permission.PermissionMapper;
+import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Permission;
 import com.springfood.domain.service.GroupPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class GroupPermissionController {
     @Autowired
     private PermissionMapper permissionMapper;
 
+    @CheckSecurity.AdminAndMaster
     @GetMapping
     public ResponseEntity<List<PermissionResponseDto>> findAll(@PathVariable Long id) {
 
@@ -33,12 +35,14 @@ public class GroupPermissionController {
         return ResponseEntity.ok(permissionResponseDtoList);
     }
 
+    @CheckSecurity.AdminAndMaster
     @PutMapping("/{permissionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void bindPermissionToRestaurant(@PathVariable Long id, @PathVariable Long permissionId) {
         this.groupPermissionService.bindPermissionToGroup(id, permissionId);
     }
 
+    @CheckSecurity.AdminAndMaster
     @DeleteMapping("/{permissionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void detachPermissionToRestaurant(@PathVariable Long id, @PathVariable Long permissionId) {

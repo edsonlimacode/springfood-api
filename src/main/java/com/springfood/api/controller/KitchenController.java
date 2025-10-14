@@ -16,7 +16,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public class KitchenController implements KitchenControllerDoc {
     @Autowired
     private KitchenMapper mapper;
 
-    @CheckSecurity.Kitchen.Manager
+    @CheckSecurity.Master
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@Valid @RequestBody KitchenRequestDto kitchenRequestDto) {
@@ -42,7 +41,7 @@ public class KitchenController implements KitchenControllerDoc {
         this.kitchenService.create(kitchen);
     }
 
-    @CheckSecurity.Kitchen.Manager
+    @CheckSecurity.Master
     @PutMapping("/{id}")
     public ResponseEntity<KitchenResponseDto> update(@PathVariable Long id, @Valid
     @RequestBody KitchenRequestDto kitchenRequestDto) {
@@ -55,17 +54,17 @@ public class KitchenController implements KitchenControllerDoc {
         return ResponseEntity.ok(kitchenResponseDto);
     }
 
+    @CheckSecurity.AdminAndMaster
     @GetMapping
     public Page<KitchenResponseDto> list(Pageable pageable) {
         Page<Kitchen> kitchens = this.kitchenService.listAll(pageable);
 
         List<KitchenResponseDto> kitchenResponseDtoList = this.mapper.toListDto(kitchens.getContent());
 
-        Page<KitchenResponseDto> kitchenResponseDtoPage = new PageImpl<>(kitchenResponseDtoList, pageable, kitchens.getTotalElements());
-
-        return kitchenResponseDtoPage;
+        return new PageImpl<>(kitchenResponseDtoList, pageable, kitchens.getTotalElements());
     }
 
+    @CheckSecurity.AdminAndMaster
     @GetMapping("/{id}")
     public ResponseEntity<KitchenResponseDto> findOne(@PathVariable Long id) {
         Kitchen kitchen = this.kitchenService.findById(id);
@@ -75,7 +74,7 @@ public class KitchenController implements KitchenControllerDoc {
         return ResponseEntity.ok(kitchenResponseDto);
     }
 
-    @CheckSecurity.Kitchen.Manager
+    @CheckSecurity.Master
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {

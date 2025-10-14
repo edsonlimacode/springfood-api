@@ -4,6 +4,7 @@ package com.springfood.api.controller;
 import com.springfood.api.dto.permission.PermissionRequestDto;
 import com.springfood.api.dto.permission.PermissionResponseDto;
 import com.springfood.api.mapper.permission.PermissionMapper;
+import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Permission;
 import com.springfood.domain.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class PermissionController {
     @Autowired
     private PermissionMapper mapper;
 
+    @CheckSecurity.Master
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void save(@Valid @RequestBody PermissionRequestDto permissionRequestDto) {
@@ -33,6 +35,7 @@ public class PermissionController {
         this.permissionService.create(permission);
     }
 
+    @CheckSecurity.Master
     @PutMapping("/{id}")
     public ResponseEntity<PermissionResponseDto> update(@PathVariable Long id, @Valid @RequestBody PermissionRequestDto permissionRequestDto) {
 
@@ -45,6 +48,7 @@ public class PermissionController {
         return ResponseEntity.ok(permissionResponseDto);
     }
 
+    @CheckSecurity.AdminAndMaster
     @GetMapping
     public ResponseEntity<List<PermissionResponseDto>> list() {
         List<Permission> permissions = this.permissionService.listAll();
@@ -54,6 +58,7 @@ public class PermissionController {
         return ResponseEntity.ok(permissionResponseDtoList);
     }
 
+    @CheckSecurity.AdminAndMaster
     @GetMapping("/{id}")
     public ResponseEntity<PermissionResponseDto> findOne(@PathVariable Long id) {
         Permission permission = this.permissionService.findById(id);
@@ -63,6 +68,7 @@ public class PermissionController {
         return ResponseEntity.ok(permissionResponseDto);
     }
 
+    @CheckSecurity.Master
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {

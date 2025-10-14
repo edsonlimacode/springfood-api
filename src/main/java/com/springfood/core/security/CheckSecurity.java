@@ -10,22 +10,20 @@ import java.lang.annotation.Target;
 
 public @interface CheckSecurity {
 
-    public @interface Kitchen {
+    @PreAuthorize("hasAuthority('MASTER')")
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public @interface Master { }
 
-        @PreAuthorize("hasAuthority('MASTER')")
-        @Retention(RetentionPolicy.RUNTIME)
-        @Target(ElementType.METHOD)
-        public @interface Manager {
-        }
-/*
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public @interface Admin { }
 
-        @PreAuthorize("isAuthenticated()")
-        @Retention(RetentionPolicy.RUNTIME)
-        @Target(ElementType.METHOD)
-        public @interface ReadOnly { }
-*/
-
-    }
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MASTER')")
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public @interface AdminAndMaster { }
 
     /*
      * returnObject → é o ResponseEntity
