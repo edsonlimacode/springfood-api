@@ -3,6 +3,7 @@ package com.springfood.api.controller;
 
 import com.springfood.api.dto.payment.PaymentResponseDto;
 import com.springfood.api.mapper.payment.PaymentMapper;
+import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Payment;
 import com.springfood.domain.service.PaymentService;
 import com.springfood.domain.service.RestaurantPaymentService;
@@ -27,6 +28,7 @@ public class RestaurantPaymentController {
     @Autowired
     private PaymentMapper paymentMapper;
 
+    @CheckSecurity.Restaurants.Admin
     @GetMapping
     public ResponseEntity<List<PaymentResponseDto>> findAll(@PathVariable Long id) {
 
@@ -37,15 +39,17 @@ public class RestaurantPaymentController {
         return ResponseEntity.ok(paymentResponseDtoList);
     }
 
+    @CheckSecurity.Restaurants.Admin
     @PutMapping("/{paymentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void bindPaymentToRestaurant(@PathVariable Long id, @PathVariable Long paymentId) {
-        this.restaurantPaymentService.bindPaymentToRestaurant(id, paymentId);
+    public void attachPaymentToRestaurant(@PathVariable Long id, @PathVariable Long paymentId) {
+        this.restaurantPaymentService.attachPaymentToRestaurant(id, paymentId);
     }
 
+    @CheckSecurity.Restaurants.Admin
     @DeleteMapping("/{paymentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void unbindPaymentToRestaurant(@PathVariable Long id, @PathVariable Long paymentId) {
+    public void detachPaymentToRestaurant(@PathVariable Long id, @PathVariable Long paymentId) {
         this.restaurantPaymentService.detachPaymentToRestaurant(id, paymentId);
     }
 }

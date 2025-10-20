@@ -1,9 +1,11 @@
 package com.springfood.domain.service;
 
+import com.springfood.core.security.JwtSecretUtils;
 import com.springfood.domain.exception.NotFoundException;
 import com.springfood.domain.model.Product;
 import com.springfood.domain.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +19,16 @@ public class ProductService {
     @Autowired
     private RestaurantService restaurantService;
 
+    @Autowired
+    private JwtSecretUtils jwtSecretUtils;
+
     public void create(Product product) {
 
-        this.restaurantService.findById(product.getRestaurant().getId());
+        var isRestaurantBelongsToUser = this.restaurantService.checkRestaurantIfBelongsToUserLogged(product.getRestaurant().getId());
+
+        if (!isRestaurantBelongsToUser) {
+            throw new AccessDeniedException("Você não tem permissão para executar esta ação");
+        }
 
         this.productRepository.save(product);
     }
@@ -31,6 +40,12 @@ public class ProductService {
 
         this.findProductByRestaurantId(id, product.getRestaurant().getId());
 
+        var isRestaurantBelongsToUser = this.restaurantService.checkRestaurantIfBelongsToUserLogged(product.getRestaurant().getId());
+
+        if (!isRestaurantBelongsToUser) {
+            throw new AccessDeniedException("Você não tem permissão para executar esta ação");
+        }
+
         return this.productRepository.save(product);
     }
 
@@ -40,9 +55,15 @@ public class ProductService {
 
     public void delete(Long id, Long restaurantId) {
 
-        Product product = this.findById(id);
+        this.findById(id);
 
-        this.findProductByRestaurantId(id, restaurantId);
+        Product product = this.findProductByRestaurantId(id, restaurantId);
+
+        var isRestaurantBelongsToUser = this.restaurantService.checkRestaurantIfBelongsToUserLogged(product.getRestaurant().getId());
+
+        if (!isRestaurantBelongsToUser) {
+            throw new AccessDeniedException("Você não tem permissão para executar esta ação");
+        }
 
         this.productRepository.deleteById(id);
     }

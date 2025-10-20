@@ -24,7 +24,7 @@ public class RestaurantPaymentService {
     }
 
     @Transactional
-    public void bindPaymentToRestaurant(Long restaurantId, Long paymentId) {
+    public void attachPaymentToRestaurant(Long restaurantId, Long paymentId) {
 
         Restaurant restaurant = this.restaurantService.findById(restaurantId);
 

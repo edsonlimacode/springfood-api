@@ -16,7 +16,6 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
     @Query("select p from Product p where p.restaurant.id = :restaurantId")
     List<Product> findAllProductsByRestaurantId(Long restaurantId);
 
-
     @Query("select f from ProductImage f join f.product p where f.product.id = :productId and p.restaurant.id = :restaurantId")
     Optional<ProductImage> findByProductId(Long productId, Long restaurantId);
 

@@ -4,6 +4,7 @@ package com.springfood.api.controller;
 import com.springfood.api.dto.product.ProductRequestDto;
 import com.springfood.api.dto.product.ProductResponseDto;
 import com.springfood.api.mapper.product.ProductMapper;
+import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Product;
 import com.springfood.domain.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class ProductController {
     @Autowired
     private ProductMapper mapper;
 
+    @CheckSecurity.Admin
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void save(@Valid @RequestBody ProductRequestDto productRequestDto) {
@@ -33,6 +35,7 @@ public class ProductController {
         this.productService.create(product);
     }
 
+    @CheckSecurity.Admin
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponseDto> update(@PathVariable Long id, @Valid @RequestBody ProductRequestDto productRequestDto) {
 
@@ -64,6 +67,7 @@ public class ProductController {
 
     }
 
+    @CheckSecurity.Admin
     @DeleteMapping("/{id}/restaurant/{restaurantId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id, @PathVariable Long restaurantId) {

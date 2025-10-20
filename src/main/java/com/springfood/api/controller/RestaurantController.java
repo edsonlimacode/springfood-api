@@ -11,15 +11,13 @@ import com.springfood.domain.exception.KitchenNotFoundException;
 import com.springfood.domain.model.Restaurant;
 import com.springfood.domain.service.KitchenService;
 import com.springfood.domain.service.RestaurantService;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -36,6 +34,7 @@ public class RestaurantController {
     @Autowired
     private RestaurantMapper mapper;
 
+    @CheckSecurity.Admin
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@Valid @RequestBody RestaurantRequestDto restaurantRequestDto) {
@@ -49,7 +48,7 @@ public class RestaurantController {
         }
     }
 
-    @CheckSecurity.Restaurants.Manager
+    @CheckSecurity.Restaurants.Admin
     @PutMapping(path = "/{id}")
     public ResponseEntity<RestaurantResponseDto> update(@PathVariable Long id, @Valid @RequestBody RestaurantRequestDto restaurantRequestDto) {
 
@@ -84,11 +83,6 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantResponseDto);
     }
 
-    /*@Operation(
-            parameters = {
-                    @Parameter(name = "Nome", description = "Nome do restaurante", example = "nordestino", in = ParameterIn.QUERY)
-            }
-    )*/
     @GetMapping("/search")
     public ResponseEntity<List<RestaurantResponseDto>> findByNameAndDelivery(
             @Parameter(description = "Nome do restaurante", example = "nordestino") String name, BigDecimal initialDeliveryValue, BigDecimal endDeliveryValue) {
@@ -107,13 +101,13 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantResponseDtoList);
     }
 
-    @CheckSecurity.Restaurants.Manager
+    @CheckSecurity.Master
     @PutMapping("/{id}/active")
     public void active(@PathVariable Long id) {
         this.restaurantService.active(id);
     }
 
-    @CheckSecurity.Restaurants.Manager
+    @CheckSecurity.Master
     @DeleteMapping("/{id}/inactive")
     public void inactive(@PathVariable Long id) {
         this.restaurantService.inactive(id);

@@ -13,18 +13,30 @@ public @interface CheckSecurity {
     @PreAuthorize("hasAuthority('MASTER')")
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
-    public @interface Master { }
+    public @interface Master {
+    }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
-    public @interface Admin { }
+    public @interface Admin {
+    }
 
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MASTER')")
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
-    public @interface AdminAndMaster { }
+    public @interface AdminAndMaster {
+    }
 
+
+    public @interface Restaurants {
+
+        @PreAuthorize("hasAuthority('ADMIN') and @jwtSecretUtils.managerRestaurants(#id)")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        public @interface Admin {
+        }
+    }
 
     /*
      * returnObject → é o ResponseEntity
@@ -45,19 +57,4 @@ public @interface CheckSecurity {
 
     }
 
-    public @interface Restaurants {
-
-        @PreAuthorize("hasAuthority('GERENCIAR_RESTAURANTES') or @jwtSecretUtils.managerRestaurants(#id)")
-        @Retention(RetentionPolicy.RUNTIME)
-        @Target(ElementType.METHOD)
-        public @interface Manager {
-        }
-
-        @PreAuthorize("isAuthenticated()")
-        @Retention(RetentionPolicy.RUNTIME)
-        @Target(ElementType.METHOD)
-        public @interface ReadOnly {
-        }
-
-    }
 }

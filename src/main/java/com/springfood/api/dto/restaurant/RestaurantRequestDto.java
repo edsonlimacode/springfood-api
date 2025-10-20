@@ -3,13 +3,13 @@ package com.springfood.api.dto.restaurant;
 
 import com.springfood.api.dto.address.AddressRequestDto;
 import com.springfood.api.dto.kitchen.KitchenIdRequestDto;
-import lombok.Getter;
-import lombok.Setter;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 
 @Getter
@@ -30,5 +30,6 @@ public class RestaurantRequestDto {
     @NotNull
     @Valid
     private AddressRequestDto address;
+
 
 }

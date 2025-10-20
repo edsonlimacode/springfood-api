@@ -1,6 +1,7 @@
 package com.springfood.api.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,5 +24,8 @@ public class UserCreateRequestDto {
     @NotBlank
     @Schema(example = "123456")
     private String password;
+
+    @NotNull
+    private Boolean admin;
 
 }

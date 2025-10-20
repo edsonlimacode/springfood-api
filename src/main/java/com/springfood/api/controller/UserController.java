@@ -7,6 +7,7 @@ import com.springfood.api.dto.user.UserUpdatePasswordRequestDto;
 import com.springfood.api.dto.user.UserUpdateRequestDto;
 import com.springfood.api.mapper.user.UserMapper;
 import com.springfood.api.openapi.controller.UserControllerDoc;
+import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.User;
 import com.springfood.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class UserController implements UserControllerDoc {
 
         User user = this.mapper.toModel(userCreateRequestDto);
 
-        this.userService.create(user);
+        this.userService.create(user, userCreateRequestDto.getAdmin());
     }
 
     @PutMapping("/{id}")
@@ -55,6 +56,7 @@ public class UserController implements UserControllerDoc {
         this.userService.updatePassword(id, passwordRequestDto.getPassword(), passwordRequestDto.getNewPassword());
     }
 
+    @CheckSecurity.AdminAndMaster
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> list() {
         List<User> users = this.userService.listAll();
@@ -64,6 +66,7 @@ public class UserController implements UserControllerDoc {
         return ResponseEntity.ok(userResponseDtoList);
     }
 
+    @CheckSecurity.AdminAndMaster
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> findById(@PathVariable Long id) {
         User user = this.userService.findById(id);
@@ -73,6 +76,7 @@ public class UserController implements UserControllerDoc {
         return ResponseEntity.ok(userResponseDto);
     }
 
+    @CheckSecurity.AdminAndMaster
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {

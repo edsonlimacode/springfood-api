@@ -3,7 +3,9 @@ package com.springfood.domain.service;
 
 import com.springfood.domain.exception.BadRequestException;
 import com.springfood.domain.exception.NotFoundException;
+import com.springfood.domain.model.Group;
 import com.springfood.domain.model.User;
+import com.springfood.domain.repository.GroupRepository;
 import com.springfood.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,9 +22,13 @@ public class UserService {
     private UserRepository repository;
 
     @Autowired
+    private GroupRepository groupRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void create(User user) {
+    @Transactional
+    public void create(User user, Boolean admin) {
 
         Optional<User> userExists = this.repository.findByEmail(user.getEmail());
 
@@ -32,7 +38,12 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        this.repository.save(user);
+        User currentUser = this.repository.save(user);
+
+        if (admin) {
+            Group groupAdmin = this.groupRepository.findByName("ADMIN").orElseThrow(() -> new NotFoundException("Group de nome ADMIN não foi encontrado"));
+            currentUser.getGroups().add(groupAdmin);
+        }
     }
 
     @Transactional

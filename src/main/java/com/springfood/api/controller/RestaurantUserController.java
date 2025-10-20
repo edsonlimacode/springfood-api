@@ -3,6 +3,7 @@ package com.springfood.api.controller;
 
 import com.springfood.api.dto.user.UserResponseDto;
 import com.springfood.api.mapper.user.UserMapper;
+import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.User;
 import com.springfood.domain.service.UserService;
 import com.springfood.domain.service.RestaurantUserService;
@@ -27,6 +28,7 @@ public class RestaurantUserController {
     @Autowired
     private UserMapper userMapper;
 
+    @CheckSecurity.Restaurants.Admin
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> findAll(@PathVariable Long id) {
 
@@ -37,15 +39,17 @@ public class RestaurantUserController {
         return ResponseEntity.ok(userResponseDtoList);
     }
 
+    @CheckSecurity.Restaurants.Admin
     @PutMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void bindUserToRestaurant(@PathVariable Long id, @PathVariable Long userId) {
-        this.restaurantUserService.bindUserToRestaurant(id, userId);
+    public void attachUserToRestaurant(@PathVariable Long id, @PathVariable Long userId) {
+        this.restaurantUserService.attachUserToRestaurant(id, userId);
     }
 
+    @CheckSecurity.Restaurants.Admin
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void unbindUserToRestaurant(@PathVariable Long id, @PathVariable Long userId) {
+    public void detachedUserToRestaurant(@PathVariable Long id, @PathVariable Long userId) {
         this.restaurantUserService.detachUserToRestaurant(id, userId);
     }
 }

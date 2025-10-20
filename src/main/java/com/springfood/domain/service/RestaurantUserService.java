@@ -24,7 +24,7 @@ public class RestaurantUserService {
     }
 
     @Transactional
-    public void bindUserToRestaurant(Long restaurantId, Long userId) {
+    public void attachUserToRestaurant(Long restaurantId, Long userId) {
 
         Restaurant restaurant = this.restaurantService.findById(restaurantId);
 

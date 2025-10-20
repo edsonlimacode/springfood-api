@@ -22,7 +22,9 @@ public class GroupService {
     public Group update(Long id, Group group) {
         group.setId(id);
 
-        this.findById(group.getId());
+        Group currentGroup = this.findById(group.getId());
+
+        group.setPermissions(currentGroup.getPermissions());
 
         return this.repository.save(group);
     }

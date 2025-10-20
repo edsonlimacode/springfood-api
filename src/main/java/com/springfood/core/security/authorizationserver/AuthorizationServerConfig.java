@@ -92,7 +92,7 @@ public class AuthorizationServerConfig {
     //busca os clients do banco
     @Bean
     public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder, JdbcOperations jdbcOperations) {
-        /*RegisteredClient foodbackend = RegisteredClient
+       /* RegisteredClient foodbackend = RegisteredClient
                 .withId("1")
                 .clientId("foodapi-backend")
                 .clientSecret(passwordEncoder.encode("backend123"))
@@ -138,7 +138,7 @@ public class AuthorizationServerConfig {
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .tokenSettings(TokenSettings.builder()
                         .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
-                        .accessTokenTimeToLive(Duration.ofDays(1))
+                        .accessTokenTimeToLive(Duration.ofDays(30))
                         .reuseRefreshTokens(false)
                         .refreshTokenTimeToLive(Duration.ofDays(15))
                         .build())
