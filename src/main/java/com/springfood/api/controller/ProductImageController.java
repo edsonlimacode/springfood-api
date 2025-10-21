@@ -3,6 +3,7 @@ package com.springfood.api.controller;
 import com.springfood.api.dto.productImage.ProductImageRequestDto;
 import com.springfood.api.dto.productImage.ProductImageResponseDto;
 import com.springfood.api.mapper.productImage.ProductImageMapper;
+import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.exception.NotFoundException;
 import com.springfood.domain.model.FileUpload;
 import com.springfood.domain.model.Product;
@@ -42,6 +43,7 @@ public class ProductImageController {
     @Autowired
     private ProductImageMapper productImageMapper;
 
+    @CheckSecurity.Admin
     @PostMapping("/upload")
     public ProductImageResponseDto upload(@PathVariable("restaurantId") Long restaurantId,
                                           @PathVariable("productId") Long productId,

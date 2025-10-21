@@ -6,6 +6,7 @@ import com.springfood.domain.model.ProductImage;
 import com.springfood.domain.repository.ProductRepository;
 import com.springfood.domain.interfaces.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,9 @@ public class ProductImageService {
     private ProductRepository productRepository;
 
     @Autowired
+    private RestaurantService restaurantService;
+
+    @Autowired
     private FileStorageService fileStorageService;
 
     @Transactional
@@ -26,6 +30,12 @@ public class ProductImageService {
 
         Long productId = productImage.getProduct().getId();
         Long restaurantId = productImage.getProduct().getRestaurant().getId();
+
+        var isRestaurantBelongsToUser = this.restaurantService.checkRestaurantIfBelongsToUserLogged(restaurantId);
+
+        if (!isRestaurantBelongsToUser) {
+            throw new AccessDeniedException("Você não tem permissão para executar esta ação");
+        }
 
         Optional<ProductImage> image = this.productRepository.findByProductId(productId, restaurantId);
 

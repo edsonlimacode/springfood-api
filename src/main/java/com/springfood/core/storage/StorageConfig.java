@@ -1,16 +1,16 @@
 package com.springfood.core.storage;
 
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.springfood.domain.interfaces.FileStorageService;
 import com.springfood.infrastructure.service.storage.LocalFileStorageService;
 import com.springfood.infrastructure.service.storage.S3FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
 
 @Configuration
 public class StorageConfig {
@@ -18,17 +18,18 @@ public class StorageConfig {
     @Autowired
     private StorageProperties properties;
 
-    @Bean
-    public AmazonS3 amazonS3Config() {
+   @Bean
+   public S3Client amazonS3Config(StorageProperties properties) {
+       AwsBasicCredentials credentials = AwsBasicCredentials.create(
+               properties.getAccessKey(),
+               properties.getAccessKeySecret()
+       );
 
-        var credentials = new BasicAWSCredentials(properties.getAccessKey(), properties.getAccessKeySecret());
-
-        return AmazonS3ClientBuilder
-                .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(properties.getRegion())
-                .build();
-    }
+       return S3Client.builder()
+               .credentialsProvider(StaticCredentialsProvider.create(credentials))
+               .region(Region.of(properties.getRegion()))
+               .build();
+   }
 
     @Bean
     public FileStorageService fileStorageService() {

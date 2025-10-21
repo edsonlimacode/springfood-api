@@ -1,13 +1,15 @@
 package com.springfood.infrastructure.service.storage;
 
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.DeleteObjectRequest;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+
 import com.springfood.core.storage.StorageProperties;
-import com.springfood.domain.model.FileUpload;
 import com.springfood.domain.interfaces.FileStorageService;
+import com.springfood.domain.model.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
+import software.amazon.awssdk.services.s3.model.GetUrlRequest;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.net.URL;
 
@@ -15,7 +17,7 @@ import java.net.URL;
 public class S3FileStorageService implements FileStorageService {
 
     @Autowired
-    private AmazonS3 amazonS3;
+    private S3Client s3Client;
 
     @Autowired
     private StorageProperties properties;
@@ -24,48 +26,58 @@ public class S3FileStorageService implements FileStorageService {
     public void upload(FileUpload fileUpload) {
 
         try {
-
             String path = getFilePath(fileUpload.getFileName());
 
-            ObjectMetadata objectMetadata = new ObjectMetadata();
-            objectMetadata.setContentType(fileUpload.getContentType());
+            PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                    .bucket(properties.getBucket())
+                    .key(path)
+                    .contentType(fileUpload.getContentType())
+                    .build();
 
-            PutObjectRequest putObjectRequest = new PutObjectRequest(
-                    properties.getBucket(),
-                    path,
-                    fileUpload.getFile(),
-                    objectMetadata);
+            s3Client.putObject(putObjectRequest, RequestBody.fromBytes(fileUpload.getFile().readAllBytes()));
 
-            amazonS3.putObject(putObjectRequest);
         } catch (Exception e) {
-            throw new StorageException("Não foi possível enviar a imagem para o S3" + e.getMessage());
+            throw new StorageException("Não foi possível enviar a imagem para o S3: " + e.getMessage(), e);
         }
 
     }
 
     @Override
     public void remove(String fileName) {
-        String path = getFilePath(fileName);
+        try {
+            String path = getFilePath(fileName);
 
-        DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(
-                properties.getBucket(),
-                path);
+            DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
+                    .bucket(properties.getBucket())
+                    .key(path)
+                    .build();
 
-        amazonS3.deleteObject(deleteObjectRequest);
+            s3Client.deleteObject(deleteObjectRequest);
+        } catch (Exception e) {
+            throw new StorageException("Erro ao remover arquivo do S3: " + e.getMessage(), e);
+        }
     }
 
 
     @Override
     public FileUpload getInputStream(String fileName) {
 
-        String path = getFilePath(fileName);
+        try {
+            String path = getFilePath(fileName);
 
-        URL url = amazonS3.getUrl(properties.getBucket(), path);
+            URL url = s3Client.utilities()
+                    .getUrl(GetUrlRequest.builder()
+                            .bucket(properties.getBucket())
+                            .key(path)
+                            .build());
 
-        FileUpload fileUpload = new FileUpload();
-        fileUpload.setUrl(url.toString());
+            FileUpload fileUpload = new FileUpload();
+            fileUpload.setUrl(url.toString());
 
-        return fileUpload;
+            return fileUpload;
+        } catch (Exception e) {
+            throw new StorageException("Erro ao obter URL do arquivo no S3: " + e.getMessage(), e);
+        }
     }
 
     private String getFilePath(String fileName) {
