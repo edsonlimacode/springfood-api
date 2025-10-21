@@ -89,6 +89,7 @@ public class ProductImageController {
 
     }
 
+    @CheckSecurity.Admin
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteImage(@PathVariable("restaurantId") Long restaurantId,

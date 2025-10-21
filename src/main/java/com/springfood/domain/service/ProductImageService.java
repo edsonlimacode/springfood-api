@@ -73,6 +73,12 @@ public class ProductImageService {
 
     @Transactional
     public void delete(Long productId, Long restaurantId) {
+        var isRestaurantBelongsToUser = this.restaurantService.checkRestaurantIfBelongsToUserLogged(restaurantId);
+
+        if (!isRestaurantBelongsToUser) {
+            throw new AccessDeniedException("Você não tem permissão para executar esta ação");
+        }
+
         ProductImage image = this.findImageByProductId(productId, restaurantId);
 
         this.productRepository.removeImage(image);

@@ -45,16 +45,16 @@ public class OrderService {
         user.setId(jwtSecretUtils.getUserId());
         order.setUser(user);
 
-        BigDecimal subTotal = order.getItens().stream().map(orderItem -> {
-            Product product = this.productService.findById(orderItem.getProduct().getId());
+        BigDecimal subTotal = order.getItens().stream().map(item -> {
+            Product product = this.productService.findById(item.getProduct().getId());
 
             this.productService.findProductByRestaurantId(product.getId(), restaurant.getId());
 
-            BigDecimal sumSubTotal = product.getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
+            BigDecimal sumSubTotal = product.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
 
-            orderItem.setTotalPrice(sumSubTotal);
-            orderItem.setUnitPrice(product.getPrice());
-            orderItem.setOrder(order);
+            item.setTotalPrice(sumSubTotal);
+            item.setUnitPrice(product.getPrice());
+            item.setOrder(order);
 
             return sumSubTotal;
 

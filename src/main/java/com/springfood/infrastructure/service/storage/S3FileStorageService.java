@@ -13,7 +13,6 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.net.URL;
 
-//@Service
 public class S3FileStorageService implements FileStorageService {
 
     @Autowired
@@ -81,8 +80,7 @@ public class S3FileStorageService implements FileStorageService {
     }
 
     private String getFilePath(String fileName) {
-        String path = this.properties.getFold() + "/" + fileName;
-        return path;
+        return this.properties.getFold() + "/" + fileName;
     }
 
 }

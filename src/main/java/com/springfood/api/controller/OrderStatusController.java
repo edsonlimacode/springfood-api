@@ -17,11 +17,13 @@ public class OrderStatusController {
     public void confirm(@PathVariable String code) {
         this.orderStatusService.confirm(code);
     }
+
     @PutMapping("/{code}/cancel")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void cancel(@PathVariable String code) {
         this.orderStatusService.cancel(code);
     }
+
     @PutMapping("/{code}/deliver")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deliver(@PathVariable String code) {

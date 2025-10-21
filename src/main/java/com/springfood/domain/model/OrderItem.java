@@ -26,8 +26,6 @@ public class OrderItem {
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
 
-   // private String observation;
-
     @ManyToOne
     private Product product;
 
