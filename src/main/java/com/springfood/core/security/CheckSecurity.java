@@ -48,11 +48,17 @@ public @interface CheckSecurity {
      * */
     public @interface Orders {
 
-        @PreAuthorize("isAuthenticated()")
-        @PostAuthorize("hasAuthority('GERENCIAR_PEDIDO') or @jwtSecretUtils.isUserAuthenticated(returnObject.body.user.id)")
+        @PostAuthorize("@jwtSecretUtils.isUserAuthenticated(returnObject.body.user.id)")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         public @interface canSearch {
+        }
+
+        @PreAuthorize("hasAuthority('ADMIN') and @jwtSecretUtils.managerRestaurants(#filters.restaurantId)" +
+                " or @jwtSecretUtils.isUserAuthenticated(#filters.userId)")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        public @interface canSearchAll {
         }
 
     }

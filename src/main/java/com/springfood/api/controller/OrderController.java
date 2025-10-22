@@ -40,6 +40,7 @@ public class OrderController {
         this.orderService.create(order);
     }
 
+    @CheckSecurity.Orders.canSearchAll
     @GetMapping
     public ResponseEntity<Page<OrderResumeResponseDto>> findAll(OrderFilters filters, Pageable pageable) {
 

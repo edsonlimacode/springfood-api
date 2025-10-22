@@ -1,6 +1,5 @@
 package com.springfood.core.security;
 
-import com.springfood.domain.model.Product;
 import com.springfood.domain.repository.ProductRepository;
 import com.springfood.domain.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +7,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class JwtSecretUtils {
@@ -52,6 +49,6 @@ public class JwtSecretUtils {
     }
 
     public boolean isUserAuthenticated(Long userId) {
-        return getUserId() != null && userId != null && getUserId().equals(userId);
+        return this.getUserId() != null && userId != null && getUserId().equals(userId);
     }
 }
