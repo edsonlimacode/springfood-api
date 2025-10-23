@@ -63,4 +63,12 @@ public @interface CheckSecurity {
 
     }
 
+    public @interface Report {
+
+        @PreAuthorize("hasAuthority('ADMIN') and @jwtSecretUtils.managerRestaurants(#filters.restaurantId)")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        public @interface Admin { }
+    }
+
 }
