@@ -106,7 +106,7 @@ CREATE TABLE user_group
      user_id  INT8 NOT NULL,
      group_id INT8 NOT NULL,
      FOREIGN KEY (group_id) REFERENCES GROUPS(id),
-     FOREIGN KEY (user_id) REFERENCES users(id)
+     FOREIGN KEY (user_id) REFERENCES users(id) on delete cascade
   );
 
   CREATE TABLE orders (
@@ -142,5 +142,5 @@ CREATE TABLE user_group
   	product_id int8 NOT NULL,
   	order_id int8 NOT null ,
   	foreign key (product_id) references products(id),
-  	foreign key (order_id) references orders(id)
+  	foreign key (order_id) references orders(id) on delete cascade
   );
