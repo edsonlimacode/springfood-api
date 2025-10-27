@@ -2,6 +2,7 @@ package com.springfood.core.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -26,21 +27,22 @@ public class ResourceServerConfig {
     @Bean
     public SecurityFilterChain resourceServerFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(HttpMethod.POST,"/users")
+                        .requestMatchers(HttpMethod.POST, "/users")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET,"/restaurant/*/product/*/image").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/restaurant/*/product/*/image").permitAll()
+                        .requestMatchers("/login", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs*/**")
                         .permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
                 .oauth2ResourceServer(oauth2 ->
                         oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
                 );
 
-        return http.build();
+        return http.formLogin(customizer -> customizer.loginPage("/login"))
+                .build();
 
 
     }

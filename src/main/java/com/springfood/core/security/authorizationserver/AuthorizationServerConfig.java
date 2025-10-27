@@ -77,7 +77,6 @@ public class AuthorizationServerConfig {
                     authorize.anyRequest().authenticated();
                 })
                 .csrf((csrf) -> csrf.ignoringRequestMatchers(new RequestMatcher[]{endpointsMatcher}))
-                .formLogin(Customizer.withDefaults())
                 .exceptionHandling(exceptions -> {
                     exceptions.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"));
                 })
@@ -153,6 +152,27 @@ public class AuthorizationServerConfig {
         jdbcRegisteredClientRepository.save(foodapiWeb);
         jdbcRegisteredClientRepository.save(foodapiWeb2);*/
 
+       /* RegisteredClient foodapiWeb2 = RegisteredClient
+                .withId("3")
+                .clientId("foodapi-web2")
+                .clientSecret(passwordEncoder.encode("web12345"))
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .tokenSettings(TokenSettings.builder()
+                        .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
+                        .accessTokenTimeToLive(Duration.ofDays(30))
+                        .reuseRefreshTokens(false)
+                        .refreshTokenTimeToLive(Duration.ofDays(15))
+                        .build())
+                .redirectUri("http://localhost:3000/api/auth/authorized")
+                .redirectUri("http://localhost:8080/swagger-ui/oauth2-redirect.html")
+                .clientSettings(ClientSettings.builder()
+                        .requireAuthorizationConsent(false).build()) //desabilita a tela de autorização após login
+                .build();
+
+        JdbcRegisteredClientRepository jdbcRegisteredClientRepository = new JdbcRegisteredClientRepository(jdbcOperations);
+        jdbcRegisteredClientRepository.save(foodapiWeb2);*/
         return new JdbcRegisteredClientRepository(jdbcOperations);
     }
 
