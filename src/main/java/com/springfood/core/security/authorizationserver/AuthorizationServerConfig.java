@@ -74,7 +74,9 @@ public class AuthorizationServerConfig {
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
         http.securityMatcher(endpointsMatcher)
                 .authorizeHttpRequests(authorize -> {
-                    authorize.anyRequest().authenticated();
+                    authorize.requestMatchers("/swagger-ui/**", "/v3/api-docs*/**")
+                            .permitAll()
+                            .anyRequest().authenticated();
                 })
                 .csrf((csrf) -> csrf.ignoringRequestMatchers(new RequestMatcher[]{endpointsMatcher}))
                 .exceptionHandling(exceptions -> {
@@ -87,8 +89,6 @@ public class AuthorizationServerConfig {
         return http.formLogin(customizer -> customizer.loginPage("/login")).build();
     }
 
-
-    //busca os clients do banco
     @Bean
     public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder, JdbcOperations jdbcOperations) {
        /* RegisteredClient foodbackend = RegisteredClient
