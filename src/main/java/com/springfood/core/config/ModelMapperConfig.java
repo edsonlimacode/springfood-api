@@ -2,8 +2,10 @@ package com.springfood.core.config;
 
 import com.springfood.api.dto.address.AddressResponseDto;
 import com.springfood.api.dto.orderItem.OrderItemRequestDto;
+import com.springfood.api.dto.restaurant.RestaurantRequestDto;
 import com.springfood.domain.model.Address;
 import com.springfood.domain.model.OrderItem;
+import com.springfood.domain.model.Restaurant;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

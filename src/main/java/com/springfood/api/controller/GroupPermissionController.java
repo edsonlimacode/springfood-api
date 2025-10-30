@@ -2,7 +2,7 @@ package com.springfood.api.controller;
 
 
 import com.springfood.api.dto.permission.PermissionResponseDto;
-import com.springfood.api.mapper.permission.PermissionMapper;
+import com.springfood.api.mapper.PermissionMapper;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Permission;
 import com.springfood.domain.service.GroupPermissionService;

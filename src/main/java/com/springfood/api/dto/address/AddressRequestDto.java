@@ -23,6 +23,6 @@ public class AddressRequestDto {
     private String neighborhood;
     @Valid
     @NotNull
-    private CityIdRequestDto city;
+    private Long cityId;
 
 }

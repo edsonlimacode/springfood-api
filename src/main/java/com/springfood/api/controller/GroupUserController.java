@@ -1,7 +1,7 @@
 package com.springfood.api.controller;
 
 import com.springfood.api.dto.group.GroupResponseDto;
-import com.springfood.api.mapper.group.GroupMapper;
+import com.springfood.api.mapper.GroupMapper;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Group;
 import com.springfood.domain.service.GroupUserService;

@@ -5,7 +5,7 @@ import com.springfood.api.dto.user.UserCreateRequestDto;
 import com.springfood.api.dto.user.UserResponseDto;
 import com.springfood.api.dto.user.UserUpdatePasswordRequestDto;
 import com.springfood.api.dto.user.UserUpdateRequestDto;
-import com.springfood.api.mapper.user.UserMapper;
+import com.springfood.api.mapper.UserMapper;
 import com.springfood.api.openapi.controller.UserControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.User;
@@ -42,7 +42,7 @@ public class UserController implements UserControllerDoc {
 
         User user = this.userService.findById(id);
 
-        this.mapper.copyPropertiesToModel(userUpdateRequestDto, user);
+        this.mapper.copyUserProperties(userUpdateRequestDto, user);
 
         User userUpdated = this.userService.update(id, user);
 

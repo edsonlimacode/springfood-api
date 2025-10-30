@@ -27,12 +27,14 @@ public class ResourceServerConfig {
     @Bean
     public SecurityFilterChain resourceServerFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(HttpMethod.POST, "/users")
-                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/restaurant/*/product/*/image").permitAll()
                         .requestMatchers("/login", "/css/**", "/js/**").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs*/**")
-                        .permitAll()
+                        .requestMatchers("/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/swagger-resources/**",
+                                "/webjars/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)

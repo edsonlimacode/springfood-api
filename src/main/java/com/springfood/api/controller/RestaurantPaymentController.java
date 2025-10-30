@@ -2,7 +2,7 @@ package com.springfood.api.controller;
 
 
 import com.springfood.api.dto.payment.PaymentResponseDto;
-import com.springfood.api.mapper.payment.PaymentMapper;
+import com.springfood.api.mapper.PaymentMapper;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Payment;
 import com.springfood.domain.service.PaymentService;

@@ -3,7 +3,7 @@ package com.springfood.api.controller;
 
 import com.springfood.api.dto.kitchen.KitchenRequestDto;
 import com.springfood.api.dto.kitchen.KitchenResponseDto;
-import com.springfood.api.mapper.kitchen.KitchenMapper;
+import com.springfood.api.mapper.KitchenMapper;
 import com.springfood.api.openapi.controller.KitchenControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Kitchen;

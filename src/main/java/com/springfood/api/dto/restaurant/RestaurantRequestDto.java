@@ -25,7 +25,7 @@ public class RestaurantRequestDto {
 
     @NotNull
     @Valid
-    private KitchenIdRequestDto kitchen;
+    private Long kitchenId;
 
     @NotNull
     @Valid

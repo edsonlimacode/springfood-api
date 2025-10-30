@@ -3,10 +3,11 @@ package com.springfood.api.controller;
 
 import com.springfood.api.dto.product.ProductRequestDto;
 import com.springfood.api.dto.product.ProductResponseDto;
-import com.springfood.api.mapper.product.ProductMapper;
+import com.springfood.api.mapper.ProductMapper;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Product;
 import com.springfood.domain.service.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@SecurityRequirement(name = "security_auth")
 public class ProductController {
 
     @Autowired

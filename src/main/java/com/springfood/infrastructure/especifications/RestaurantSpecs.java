@@ -10,6 +10,7 @@ import jakarta.persistence.criteria.Root;
 import java.math.BigDecimal;
 
 public class RestaurantSpecs {
+
     public static Specification<Restaurant> withFreeDelivery() {
         return RestaurantSpecs::withFreeDeliveryPredicate;
     }

@@ -2,7 +2,7 @@ package com.springfood.api.controller;
 
 
 import com.springfood.api.dto.user.UserResponseDto;
-import com.springfood.api.mapper.user.UserMapper;
+import com.springfood.api.mapper.UserMapper;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.User;
 import com.springfood.domain.service.UserService;
