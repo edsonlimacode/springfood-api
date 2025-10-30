@@ -2,7 +2,6 @@ package com.springfood.api.dto.restaurant;
 
 
 import com.springfood.api.dto.address.AddressRequestDto;
-import com.springfood.api.dto.kitchen.KitchenIdRequestDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +23,6 @@ public class RestaurantRequestDto {
     private BigDecimal delivery;
 
     @NotNull
-    @Valid
     private Long kitchenId;
 
     @NotNull

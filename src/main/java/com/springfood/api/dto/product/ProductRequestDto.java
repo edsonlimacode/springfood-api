@@ -1,13 +1,12 @@
 package com.springfood.api.dto.product;
 
-import com.springfood.api.dto.restaurant.RestaurantIdRequestDto;
-import lombok.Getter;
-import lombok.Setter;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 
 @Getter
@@ -23,8 +22,7 @@ public class ProductRequestDto {
 
     private Boolean status = Boolean.TRUE;
 
-    @Valid
     @NotNull
-    private RestaurantIdRequestDto restaurant;
+    private Long restaurantId;
 
 }

@@ -2,7 +2,7 @@ package com.springfood.api.controller;
 
 import com.springfood.api.dto.productImage.ProductImageRequestDto;
 import com.springfood.api.dto.productImage.ProductImageResponseDto;
-import com.springfood.api.mapper.productImage.ProductImageMapper;
+import com.springfood.api.mapper.ProductImageMapper;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.exception.NotFoundException;
 import com.springfood.domain.model.FileUpload;

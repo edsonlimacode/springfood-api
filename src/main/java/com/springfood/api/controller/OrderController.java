@@ -5,7 +5,7 @@ import com.springfood.api.dto.order.OrderRequestDto;
 import com.springfood.api.dto.order.OrderResponseDto;
 import com.springfood.api.dto.order.OrderResumeResponseDto;
 import com.springfood.api.filter.OrderFilters;
-import com.springfood.api.mapper.order.OrderMapper;
+import com.springfood.api.mapper.OrderMapper;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Order;
 import com.springfood.domain.service.OrderService;
