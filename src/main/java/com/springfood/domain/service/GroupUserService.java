@@ -35,14 +35,13 @@ public class GroupUserService {
     public void attachGroupToUser(Long userId, Long groupId) {
 
         User user = this.userService.findById(userId);
+        Group group = this.groupService.findById(groupId);
 
         var userLogged = this.userService.findById(jwtSecretUtils.getUserId());
 
-        var isMaster = userLogged.getGroups().stream().anyMatch(g -> g.getName().equals("MASTER"));
+        var isAdmin = userLogged.getGroups().stream().anyMatch(g -> g.getName().equals("ADMIN"));
 
-        Group group = this.groupService.findById(groupId);
-
-        if (!isMaster && group.getName().equals("MASTER")) {
+        if (isAdmin && group.getName().equals("MASTER")) {
             throw new AccessDeniedException("Apenas usuários de nivél master, podem adicionar grupo MASTER a um usuário");
         } else {
             user.getGroups().add(group);

@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "kitchen")
+@Table(name = "kitchens")
 public class Kitchen {
 
     @Id

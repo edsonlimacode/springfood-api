@@ -12,7 +12,7 @@ CREATE TABLE cities
      FOREIGN KEY (state_id) REFERENCES states(id)
   );
 
-CREATE TABLE kitchen
+CREATE TABLE kitchens
   (
      id   BIGSERIAL NOT NULL PRIMARY KEY,
      name VARCHAR(255) NOT NULL
@@ -34,7 +34,7 @@ CREATE TABLE restaurants
      created_at           TIMESTAMP,
      updated_at           TIMESTAMP,
      FOREIGN KEY (address_city_id) REFERENCES cities(id),
-     FOREIGN KEY (kitchen_id) REFERENCES kitchen(id)
+     FOREIGN KEY (kitchen_id) REFERENCES kitchens(id)
   );
 
 CREATE TABLE products
@@ -45,6 +45,15 @@ CREATE TABLE products
      status        BOOLEAN,
      restaurant_id INT8 NOT NULL,
      FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
+  );
+
+  CREATE TABLE public.product_image (
+  	product_id int8 NULL,
+  	"name" varchar NULL,
+  	"type" varchar NULL,
+  	"size" int8 NULL,
+  	CONSTRAINT product_image_pk PRIMARY KEY (product_id),
+  	CONSTRAINT product_image_products_fk FOREIGN KEY (product_id) REFERENCES public.products(id) ON DELETE CASCADE
   );
 
 CREATE TABLE payments
@@ -58,7 +67,7 @@ CREATE TABLE restaurant_payment
      restaurant_id INT8 NOT NULL,
      payment_id    INT8 NOT NULL,
      FOREIGN KEY (payment_id) REFERENCES payments(id),
-     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
+     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) on delete cascade
   );
 
   CREATE TABLE users
@@ -77,7 +86,7 @@ CREATE TABLE restaurant_payment
      restaurant_id INT8 NOT NULL,
      user_id    INT8 NOT NULL,
      FOREIGN KEY (user_id) REFERENCES users(id),
-     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
+     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) on delete cascade
   );
 
 CREATE TABLE GROUPS
@@ -97,7 +106,7 @@ CREATE TABLE group_permission
   (
      group_id      INT8 NOT NULL,
      permission_id INT8 NOT NULL,
-     FOREIGN KEY (group_id) REFERENCES GROUPS(id),
+     FOREIGN KEY (group_id) REFERENCES GROUPS(id) on delete cascade,
      FOREIGN KEY (permission_id) REFERENCES permissions(id)
   );
 
@@ -105,8 +114,8 @@ CREATE TABLE user_group
   (
      user_id  INT8 NOT NULL,
      group_id INT8 NOT NULL,
-     FOREIGN KEY (group_id) REFERENCES GROUPS(id),
-     FOREIGN KEY (user_id) REFERENCES users(id) on delete cascade
+     FOREIGN KEY (group_id) REFERENCES GROUPS(id) on delete cascade,
+     FOREIGN KEY (user_id) REFERENCES users(id)
   );
 
   CREATE TABLE orders (

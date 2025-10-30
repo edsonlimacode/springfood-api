@@ -41,7 +41,9 @@ public class RestaurantService {
         Restaurant restaurantSaved = this.repository.save(restaurant);
 
         User user = this.userService.findById(jwtSecretUtils.getUserId());
+
         var admin = user.getGroups().stream().anyMatch(g -> g.getName().equals("ADMIN"));
+
         if (admin) {
             restaurantSaved.getUsers().add(user);
         }
