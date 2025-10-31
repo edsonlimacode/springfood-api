@@ -34,6 +34,8 @@ public class ResourceServerConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/swagger-resources/**",
+                                "/swagger-ui-custom.html",
+                                "/swagger-ui-custom/**",
                                 "/webjars/**").permitAll()
                         .anyRequest().authenticated()
                 )

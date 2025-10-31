@@ -2,6 +2,7 @@ package com.springfood.core.config;
 
 
 import com.springfood.api.exceptionHandler.ProblemDetails;
+import com.springfood.api.openapi.model.PageModelOpenApi;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.OAuthFlow;
@@ -14,11 +15,13 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.responses.ApiResponses;
+import io.swagger.v3.oas.models.tags.Tag;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -39,7 +42,14 @@ public class SpringDocConfig {
         return new OpenAPI()
                 .info(new Info().title("SpringShop API")
                         .description("Spring shop sample application")
-                        .version("v0.0.1")).components(new Components().schemas(this.schemasMap()));
+                        .version("v0.0.1"))
+                .tags(List.of(
+                        new Tag().name("Grupos").description("Gerencia os grupos"),
+                        new Tag().name("Restaurantes").description("Gerencia os restaurantes"),
+                        new Tag().name("Pedidos").description("Gerencia os pedidos"),
+                        new Tag().name("Usuários").description("Gerencia os usuários")
+                ))
+                .components(new Components().schemas(this.schemasMap()));
     }
 
     @Bean
@@ -90,10 +100,12 @@ public class SpringDocConfig {
         final Map<String, Schema> schemaMap = new HashMap<>();
 
         Map<String, Schema> problemDetailsSchema = ModelConverters.getInstance().read(ProblemDetails.class);
+        Map<String, Schema> pageModelOpenApi = ModelConverters.getInstance().read(PageModelOpenApi.class);
         Map<String, Schema> problemDetailsSchemaField = ModelConverters.getInstance().read(ProblemDetails.Field.class);
 
         schemaMap.putAll(problemDetailsSchema);
         schemaMap.putAll(problemDetailsSchemaField);
+        schemaMap.putAll(pageModelOpenApi);
 
         return schemaMap;
     }

@@ -10,6 +10,8 @@ import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Order;
 import com.springfood.domain.service.OrderService;
 import com.springfood.infrastructure.especifications.OrderSpecs;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -25,6 +27,8 @@ import static com.springfood.core.data.PageableConverter.convertProperties;
 
 @RestController
 @RequestMapping("/orders")
+@SecurityRequirement(name = "security_auth")
+@Tag(name = "Pedidos")
 public class OrderController {
 
     @Autowired

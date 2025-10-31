@@ -10,6 +10,8 @@ import com.springfood.api.openapi.controller.UserControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.User;
 import com.springfood.domain.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

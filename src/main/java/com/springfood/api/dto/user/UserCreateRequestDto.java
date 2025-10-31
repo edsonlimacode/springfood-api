@@ -16,15 +16,16 @@ public class UserCreateRequestDto {
     @NotBlank
     private String name;
 
+    @Schema(example = "joão@gmail.com")
     @NotBlank
     @Email
-    @Schema(example = "joão@email.com")
     private String email;
 
-    @NotBlank
     @Schema(example = "123456")
+    @NotBlank
     private String password;
 
+    @Schema(example = "false")
     @NotNull
     private Boolean admin;
 

@@ -5,6 +5,8 @@ import com.springfood.api.mapper.GroupMapper;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Group;
 import com.springfood.domain.service.GroupUserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/users/{id}/groups")
+@Tag(name = "Usuários")
+@SecurityRequirement(name = "security_auth")
 public class GroupUserController {
 
     @Autowired

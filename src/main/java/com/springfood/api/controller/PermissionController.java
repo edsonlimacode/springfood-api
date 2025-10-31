@@ -4,20 +4,21 @@ package com.springfood.api.controller;
 import com.springfood.api.dto.permission.PermissionRequestDto;
 import com.springfood.api.dto.permission.PermissionResponseDto;
 import com.springfood.api.mapper.PermissionMapper;
+import com.springfood.api.openapi.controller.PermissionControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Permission;
 import com.springfood.domain.service.PermissionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/permissions")
-public class PermissionController {
+public class PermissionController implements PermissionControllerDoc {
 
     @Autowired
     private PermissionService permissionService;

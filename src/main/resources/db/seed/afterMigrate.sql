@@ -1,7 +1,8 @@
 
-delete from states;
 delete from cities;
+delete from states;
 delete from groups;
+delete from users;
 delete from permissions;
 delete from oauth2_registered_client;
 delete from kitchens;
@@ -11,8 +12,16 @@ INSERT INTO public.cities (name,state_id) VALUES('várzea alegre',1);
 
 INSERT INTO public.payments (description) VALUES ('Pix'),('cartão de crédito/débito'),('dinheiro'),('Outro');
 
-INSERT INTO groups ("name") VALUES ('MASTER'),('ADMIN');
-INSERT INTO permissions (description, "name") VALUES (NULL, 'MASTER'), (NULL, 'ADMIN');
+INSERT INTO groups ("id","name") VALUES (1,'MASTER'),(2,'ADMIN');
+
+INSERT INTO public.users (id, email, "name", "password", created_at, updated_at) VALUES(1, 'master@gmail.com', 'master', '$2a$10$SlAz/gLH0gMT7TSh5k8HAOiobIodOUwH2YPgLL0Z4sBFqOiE0QH6u', '2025-10-31 12:28:52.346', '2025-10-31 12:28:52.346');
+INSERT INTO public.users (id, email, "name", "password", created_at, updated_at) VALUES(2, 'admin@gmail.com', 'amdin', '$2a$10$6hDUaA0to0LSREiuEAInEuthvn.QUza41Pg.SWc8iCPDEnMvUCnl.', '2025-10-31 12:29:27.464', '2025-10-31 12:29:27.464');
+INSERT INTO public.users (id, email, "name", "password", created_at, updated_at) VALUES(3, 'cliente@gmail.com', 'cliente', '$2a$10$Fslnp1F4LibksmvlLmkFtOh.G67lDcxhrmAMUKz9e1wqf75LiYVFe', '2025-10-31 12:30:00.435', '2025-10-31 12:30:00.435');
+
+INSERT INTO permissions (id,description, "name") VALUES (1,NULL, 'MASTER'), (2,NULL, 'ADMIN');
+
+INSERT INTO group_permission (group_id, permission_id) VALUES(1, 1),(2, 2);
+INSERT INTO user_group (user_id, group_id) VALUES(1, 1),(2, 2);
 
 INSERT INTO kitchens ("name") VALUES ('brasileira'),('italiana'),('japonesa'),('mexicana'),('vegana');
 

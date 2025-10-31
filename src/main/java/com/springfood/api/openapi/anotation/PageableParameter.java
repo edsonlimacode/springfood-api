@@ -27,11 +27,11 @@ import java.lang.annotation.Target;
 @Parameter(
         in = ParameterIn.QUERY,
         name = "sort",
-        description = "Critério de ordenação ex: nome,asc ou nome,desc",
+        description = "Critério de ordenação ex: name,asc ou name,desc",
         examples = {
-                @ExampleObject("nome"),
-                @ExampleObject("nome,asc"),
-                @ExampleObject("nome,desc")
+                @ExampleObject("name"),
+                @ExampleObject("name,asc"),
+                @ExampleObject("name,desc")
         }
 )
 public @interface PageableParameter { }

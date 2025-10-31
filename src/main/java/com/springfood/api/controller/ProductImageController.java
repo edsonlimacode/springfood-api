@@ -12,6 +12,8 @@ import com.springfood.domain.repository.ProductRepository;
 import com.springfood.domain.service.ProductImageService;
 import com.springfood.domain.service.ProductService;
 import com.springfood.domain.interfaces.FileStorageService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +28,8 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/restaurant/{restaurantId}/product/{productId}/image")
+@SecurityRequirement(name = "security_auth")
+@Tag(name = "Restaurantes")
 public class ProductImageController {
 
     @Autowired

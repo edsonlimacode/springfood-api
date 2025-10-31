@@ -6,6 +6,7 @@ import com.springfood.api.filter.DailySaleFilters;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.interfaces.DailySaleService;
 import com.springfood.infrastructure.service.PDFDailySaleServiceImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/statistics")
+@SecurityRequirement(name = "security_auth")
 public class DailySaleController {
 
     @Autowired

@@ -6,6 +6,8 @@ import com.springfood.api.mapper.PermissionMapper;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Permission;
 import com.springfood.domain.service.GroupPermissionService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/groups/{id}/permissions")
+@SecurityRequirement(name = "security_auth")
+@Tag(name = "Grupos")
 public class GroupPermissionController {
 
     @Autowired

@@ -4,9 +4,12 @@ package com.springfood.api.controller;
 import com.springfood.api.dto.group.GroupRequestDto;
 import com.springfood.api.dto.group.GroupResponseDto;
 import com.springfood.api.mapper.GroupMapper;
+import com.springfood.api.openapi.controller.GroupControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Group;
 import com.springfood.domain.service.GroupService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/groups")
-public class GroupController {
+public class GroupController implements GroupControllerDoc {
 
     @Autowired
     private GroupService groupService;

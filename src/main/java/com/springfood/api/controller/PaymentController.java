@@ -8,6 +8,7 @@ import com.springfood.api.mapper.PaymentMapper;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Payment;
 import com.springfood.domain.service.PaymentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;

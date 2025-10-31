@@ -8,7 +8,6 @@ import com.springfood.api.openapi.controller.KitchenControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Kitchen;
 import com.springfood.domain.service.KitchenService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +21,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/kitchens")
-@SecurityRequirement(name = "security_auth")
 public class KitchenController implements KitchenControllerDoc {
 
     @Autowired
@@ -80,5 +78,4 @@ public class KitchenController implements KitchenControllerDoc {
     public void deleteById(@PathVariable Long id) {
         this.kitchenService.delete(id);
     }
-
 }

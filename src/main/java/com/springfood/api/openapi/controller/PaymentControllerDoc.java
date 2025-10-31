@@ -18,21 +18,21 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @SecurityRequirement(name = "security_auth")
-@Tag(name = "Pagamentos", description = "Gerencia endpoints para pagamentos")
+@Tag(name = "Formas de Pagamento")
 public interface PaymentControllerDoc {
 
 
     @Operation(summary = "Cadastra uma forma de pagamento")
     @ApiResponses({@ApiResponse(responseCode = "201", description = "Cadastrado")})
-    public void save(@RequestBody(description = "Representação do modelo de um novo pagamento") PaymentRequestDto paymentRequestDto);
+    void save(@RequestBody(description = "Representação do modelo de um novo pagamento") PaymentRequestDto paymentRequestDto);
 
     @Operation(summary = "Atualiza uma forma de pagamento")
-    public ResponseEntity<PaymentResponseDto> update(@Parameter(name = "ID de um pagamento", example = "1") Long id,
+     ResponseEntity<PaymentResponseDto> update(@Parameter(name = "ID de um pagamento", example = "1") Long id,
                                                      @RequestBody(description = "Representação do modelo de atualizar um pagamento")
                                                      PaymentRequestDto paymentRequestDto);
 
     @Operation(summary = "Lista as formas de pagamentos")
-    public ResponseEntity<List<PaymentResponseDto>> list();
+     ResponseEntity<List<PaymentResponseDto>> list();
 
     @Operation(summary = "busca uma forma de pagamento pelo ID")
     @ApiResponses({
