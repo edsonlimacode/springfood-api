@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 @Setter
 public class GroupRequestDto {
 
-    @Schema(nullable = true)
+    @Schema(example = "ADMIN")
     @NotBlank
     private String name;
 

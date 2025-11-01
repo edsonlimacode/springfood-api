@@ -4,6 +4,8 @@ import com.springfood.api.dto.group.GroupRequestDto;
 import com.springfood.api.dto.group.GroupResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -30,8 +32,8 @@ public interface GroupControllerDoc {
     @Operation(summary = "Busca um grupo por ID")
     @ApiResponses({
                     @ApiResponse(responseCode = "200", description = "Sucesso"),
-                    @ApiResponse(responseCode = "400", description = "ID do grupo inválido"),
-                    @ApiResponse(responseCode = "404", description = "Grupo não encontrado")
+                    @ApiResponse(responseCode = "400", description = "ID do grupo inválido", content = @Content(schema = @Schema())),
+                    @ApiResponse(responseCode = "404", description = "Grupo não encontrado", content = @Content(schema = @Schema()))
             })
     ResponseEntity<GroupResponseDto> findOne(@Parameter(description = "ID de um grupo", example = "1") Long id);
 

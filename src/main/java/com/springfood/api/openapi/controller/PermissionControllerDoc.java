@@ -5,6 +5,8 @@ import com.springfood.api.dto.permission.PermissionRequestDto;
 import com.springfood.api.dto.permission.PermissionResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -31,8 +33,8 @@ public interface PermissionControllerDoc {
     @Operation(summary = "Busca uma permissão por ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Sucesso"),
-            @ApiResponse(responseCode = "400", description = "ID do grupo inválido"),
-            @ApiResponse(responseCode = "404", description = "Grupo não encontrado")
+            @ApiResponse(responseCode = "400", description = "ID da permissão inválido", content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "404", description = "Permissão não encontrada", content = @Content(schema = @Schema()))
     })
     ResponseEntity<PermissionResponseDto> findOne(@Parameter(description = "ID da permissão",example = "1") Long id);
 

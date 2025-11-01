@@ -3,6 +3,7 @@ package com.springfood.api.controller;
 
 import com.springfood.api.dto.permission.PermissionResponseDto;
 import com.springfood.api.mapper.PermissionMapper;
+import com.springfood.api.openapi.controller.GroupPermissionControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Permission;
 import com.springfood.domain.service.GroupPermissionService;
@@ -18,9 +19,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/groups/{id}/permissions")
-@SecurityRequirement(name = "security_auth")
-@Tag(name = "Grupos")
-public class GroupPermissionController {
+public class GroupPermissionController implements GroupPermissionControllerDoc {
 
     @Autowired
     private GroupPermissionService groupPermissionService;
@@ -42,7 +41,7 @@ public class GroupPermissionController {
     @CheckSecurity.AdminAndMaster
     @PutMapping("/{permissionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void bindPermissionToRestaurant(@PathVariable Long id, @PathVariable Long permissionId) {
+    public void attachPermissionToRestaurant(@PathVariable Long id, @PathVariable Long permissionId) {
         this.groupPermissionService.attachPermissionToGroup(id, permissionId);
     }
 

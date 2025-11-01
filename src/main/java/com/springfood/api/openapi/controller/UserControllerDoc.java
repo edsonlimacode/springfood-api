@@ -6,7 +6,11 @@ import com.springfood.api.dto.user.UserUpdatePasswordRequestDto;
 import com.springfood.api.dto.user.UserUpdateRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +35,11 @@ public interface UserControllerDoc {
     ResponseEntity<List<UserResponseDto>> list();
 
     @Operation(summary = "Busca um usuário pelo ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Sucesso"),
+            @ApiResponse(responseCode = "400", description = "Id do usuário inválido", content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "404", description = "Usuário não econtrado", content = @Content(schema = @Schema))
+    })
     ResponseEntity<UserResponseDto> findById(@Parameter(description = "ID do usuário", example = "1") Long id);
 
     @Operation(summary = "Remove um usuário pelo ID")

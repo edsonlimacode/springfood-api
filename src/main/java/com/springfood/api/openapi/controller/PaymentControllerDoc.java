@@ -3,7 +3,6 @@ package com.springfood.api.openapi.controller;
 
 import com.springfood.api.dto.payment.PaymentRequestDto;
 import com.springfood.api.dto.payment.PaymentResponseDto;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -36,7 +35,7 @@ public interface PaymentControllerDoc {
 
     @Operation(summary = "busca uma forma de pagamento pelo ID")
     @ApiResponses({
-            @ApiResponse(responseCode = "400", description = "Id do pagamento inválido", content = @Content(schema = @Schema(ref = "ProblemDetails"))),
+            @ApiResponse(responseCode = "400", description = "Id do pagamento inválido", content = @Content(schema = @Schema())),
             @ApiResponse(responseCode = "200", description = "Sucesso"),
             @ApiResponse(responseCode = "404", description = "Pagamento não econtrado", content = @Content(schema = @Schema))
     })

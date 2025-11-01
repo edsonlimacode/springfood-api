@@ -66,7 +66,7 @@
             <version>1.5.2</version>
         </dependency>
 
-        <!--Oauth2 precisa dessa dependencia nessa versao-->
+       <!-- &lt;!&ndash;Oauth2 precisa dessa dependencia nessa versao&ndash;&gt;
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>oauth2-oidc-sdk</artifactId>
@@ -77,7 +77,7 @@
                     <artifactId>nimbus-jose-jwt</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

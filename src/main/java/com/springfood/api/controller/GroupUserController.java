@@ -2,6 +2,7 @@ package com.springfood.api.controller;
 
 import com.springfood.api.dto.group.GroupResponseDto;
 import com.springfood.api.mapper.GroupMapper;
+import com.springfood.api.openapi.controller.GroupUserControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Group;
 import com.springfood.domain.service.GroupUserService;
@@ -16,9 +17,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/users/{id}/groups")
-@Tag(name = "Usuários")
-@SecurityRequirement(name = "security_auth")
-public class GroupUserController {
+public class GroupUserController implements GroupUserControllerDoc {
 
     @Autowired
     private GroupUserService groupUserService;
