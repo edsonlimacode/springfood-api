@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @SecurityRequirement(name = "security_auth")
-@Tag(name = "Formas de Pagamento")
+@Tag(name = "Formas de Pagamento", description = "Gerencia as formas de pagamento")
 public interface PaymentControllerDoc {
 
 
@@ -35,18 +35,13 @@ public interface PaymentControllerDoc {
 
     @Operation(summary = "busca uma forma de pagamento pelo ID")
     @ApiResponses({
-            @ApiResponse(responseCode = "400", description = "Id do pagamento inválido", content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "400", description = "Id do recurso inválido", content = @Content(schema = @Schema())),
             @ApiResponse(responseCode = "200", description = "Sucesso"),
-            @ApiResponse(responseCode = "404", description = "Pagamento não econtrado", content = @Content(schema = @Schema))
+            @ApiResponse(responseCode = "404", description = "Recurso não encontrado", content = @Content(schema = @Schema))
     })
     public ResponseEntity<PaymentResponseDto> findOne(@Parameter(description = "ID de um pagamento", example = "1") Long id);
 
     @Operation(summary = "remove uma forma de pagamento pelo ID")
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Nenhum conteudo disponivel"),
-            @ApiResponse(responseCode = "400", description = "Id da pagamento inválido", content = @Content(schema = @Schema(ref = "ProblemDetails"))),
-            @ApiResponse(responseCode = "404", description = "Pagamento não econtrado", content = @Content(schema = @Schema(ref = "ProblemDetails")))
-    })
     public void deleteById(@Parameter(description = "ID de um pagamento", example = "1", required = true) Long id);
 
 }

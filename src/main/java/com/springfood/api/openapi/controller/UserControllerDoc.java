@@ -37,8 +37,8 @@ public interface UserControllerDoc {
     @Operation(summary = "Busca um usuário pelo ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Sucesso"),
-            @ApiResponse(responseCode = "400", description = "Id do usuário inválido", content = @Content(schema = @Schema())),
-            @ApiResponse(responseCode = "404", description = "Usuário não econtrado", content = @Content(schema = @Schema))
+            @ApiResponse(responseCode = "400", description = "Id do recurso inválido", content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "404", description = "Recurso não encontrado", content = @Content(schema = @Schema))
     })
     ResponseEntity<UserResponseDto> findById(@Parameter(description = "ID do usuário", example = "1") Long id);
 

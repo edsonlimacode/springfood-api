@@ -4,6 +4,7 @@ package com.springfood.api.controller;
 import com.springfood.api.dto.product.ProductRequestDto;
 import com.springfood.api.dto.product.ProductResponseDto;
 import com.springfood.api.mapper.ProductMapper;
+import com.springfood.api.openapi.controller.ProductControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Product;
 import com.springfood.domain.service.ProductService;
@@ -18,8 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
-@SecurityRequirement(name = "security_auth")
-public class ProductController {
+public class ProductController implements ProductControllerDoc {
 
     @Autowired
     private ProductService productService;

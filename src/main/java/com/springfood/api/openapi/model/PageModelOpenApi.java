@@ -8,10 +8,9 @@ import java.util.List;
 
 @Schema(name = "PageModelOpenApi")
 @Getter
-public class PageModelOpenApi {
+public abstract class PageModelOpenApi {
 
-    @Schema(example = "[{\"id\":1,\"name\":\"Brasileira\"},{\"id\":2,\"name\":\"Tailandesa\"}]")
-    private List<Kitchen> data;
+    private List<Object> data;
     @Schema(example = "5")
     private Long totalElements;
     @Schema(example = "0")

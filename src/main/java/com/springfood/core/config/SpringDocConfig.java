@@ -2,7 +2,9 @@ package com.springfood.core.config;
 
 
 import com.springfood.api.exceptionHandler.ProblemDetails;
+import com.springfood.api.openapi.model.PageModelKitchen;
 import com.springfood.api.openapi.model.PageModelOpenApi;
+import com.springfood.api.openapi.model.PageModelOrder;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.OAuthFlow;
@@ -99,13 +101,15 @@ public class SpringDocConfig {
     private Map<String, Schema> schemasMap() {
         final Map<String, Schema> schemaMap = new HashMap<>();
 
-        Map<String, Schema> problemDetailsSchema = ModelConverters.getInstance().read(ProblemDetails.class);
-        Map<String, Schema> pageModelOpenApi = ModelConverters.getInstance().read(PageModelOpenApi.class);
-        Map<String, Schema> problemDetailsSchemaField = ModelConverters.getInstance().read(ProblemDetails.Field.class);
+        var problemDetailsSchema = ModelConverters.getInstance().read(ProblemDetails.class);
+        var pageModelKitchenOpenApi = ModelConverters.getInstance().read(PageModelKitchen.class);
+        var pageModelOrderOpenApi = ModelConverters.getInstance().read(PageModelOrder.class);
+        var problemDetailsSchemaField = ModelConverters.getInstance().read(ProblemDetails.Field.class);
 
         schemaMap.putAll(problemDetailsSchema);
         schemaMap.putAll(problemDetailsSchemaField);
-        schemaMap.putAll(pageModelOpenApi);
+        schemaMap.putAll(pageModelKitchenOpenApi);
+        schemaMap.putAll(pageModelOrderOpenApi);
 
         return schemaMap;
     }

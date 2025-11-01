@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @SecurityRequirement(name = "security_auth")
-@Tag(name = "Permissões")
+@Tag(name = "Permissões", description = "Gerencia as permissões")
 public interface PermissionControllerDoc {
 
     @Operation(summary = "Cadastra uma permissão")
@@ -33,8 +33,8 @@ public interface PermissionControllerDoc {
     @Operation(summary = "Busca uma permissão por ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Sucesso"),
-            @ApiResponse(responseCode = "400", description = "ID da permissão inválido", content = @Content(schema = @Schema())),
-            @ApiResponse(responseCode = "404", description = "Permissão não encontrada", content = @Content(schema = @Schema()))
+            @ApiResponse(responseCode = "400", description = "ID da recurso inválido", content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "404", description = "Recurso não encontrada", content = @Content(schema = @Schema()))
     })
     ResponseEntity<PermissionResponseDto> findOne(@Parameter(description = "ID da permissão",example = "1") Long id);
 

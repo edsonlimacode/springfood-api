@@ -6,6 +6,7 @@ import com.springfood.api.dto.order.OrderResponseDto;
 import com.springfood.api.dto.order.OrderResumeResponseDto;
 import com.springfood.api.filter.OrderFilters;
 import com.springfood.api.mapper.OrderMapper;
+import com.springfood.api.openapi.controller.OrderControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.Order;
 import com.springfood.domain.service.OrderService;
@@ -27,9 +28,7 @@ import static com.springfood.core.data.PageableConverter.convertProperties;
 
 @RestController
 @RequestMapping("/orders")
-@SecurityRequirement(name = "security_auth")
-@Tag(name = "Pedidos")
-public class OrderController {
+public class OrderController implements OrderControllerDoc {
 
     @Autowired
     private OrderService orderService;

@@ -32,8 +32,8 @@ public interface GroupControllerDoc {
     @Operation(summary = "Busca um grupo por ID")
     @ApiResponses({
                     @ApiResponse(responseCode = "200", description = "Sucesso"),
-                    @ApiResponse(responseCode = "400", description = "ID do grupo inválido", content = @Content(schema = @Schema())),
-                    @ApiResponse(responseCode = "404", description = "Grupo não encontrado", content = @Content(schema = @Schema()))
+                    @ApiResponse(responseCode = "400", description = "ID do recurso inválido", content = @Content(schema = @Schema())),
+                    @ApiResponse(responseCode = "404", description = "Recurso não encontrado", content = @Content(schema = @Schema()))
             })
     ResponseEntity<GroupResponseDto> findOne(@Parameter(description = "ID de um grupo", example = "1") Long id);
 

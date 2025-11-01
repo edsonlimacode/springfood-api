@@ -29,8 +29,8 @@ public interface GroupPermissionControllerDoc {
     @Operation(summary = "Lista as permissões associadas a um grupo")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Sucesso"),
-            @ApiResponse(responseCode = "400", description = "ID do grupo inválido",content = @Content(schema = @Schema())),
-            @ApiResponse(responseCode = "404", description = "Grupo não encontrado", content = @Content(schema = @Schema()))
+            @ApiResponse(responseCode = "400", description = "ID do recurso inválido",content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "404", description = "Recurso não encontrado", content = @Content(schema = @Schema()))
     })
     ResponseEntity<List<PermissionResponseDto>> findAll(@Parameter(description = "ID do grupo", example = "1") Long id);
 

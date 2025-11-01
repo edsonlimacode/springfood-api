@@ -20,8 +20,8 @@ public interface GroupUserControllerDoc {
     @Operation(summary = "Lista os usuários associados a um grupo")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Sucesso"),
-            @ApiResponse(responseCode = "400", description = "Id do usuário inválido", content = @Content(schema = @Schema())),
-            @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content(schema = @Schema))
+            @ApiResponse(responseCode = "400", description = "Id do recurso inválido", content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "404", description = "Recurso não encontrado", content = @Content(schema = @Schema))
     })
     ResponseEntity<List<GroupResponseDto>> groupsByUserId(@Parameter(description = "ID do usuário", example = "1") Long id);
 
