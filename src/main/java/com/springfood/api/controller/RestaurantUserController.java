@@ -3,6 +3,7 @@ package com.springfood.api.controller;
 
 import com.springfood.api.dto.user.UserResponseDto;
 import com.springfood.api.mapper.UserMapper;
+import com.springfood.api.openapi.controller.RestaurantUserControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.model.User;
 import com.springfood.domain.service.UserService;
@@ -19,9 +20,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/restaurants/{id}/users")
-@SecurityRequirement(name = "security_auth")
-@Tag(name = "Restaurantes")
-public class RestaurantUserController {
+public class RestaurantUserController implements RestaurantUserControllerDoc {
 
     @Autowired
     private RestaurantUserService restaurantUserService;

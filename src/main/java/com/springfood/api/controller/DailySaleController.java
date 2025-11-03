@@ -3,6 +3,7 @@ package com.springfood.api.controller;
 
 import com.springfood.api.dto.sale.DailySale;
 import com.springfood.api.filter.DailySaleFilters;
+import com.springfood.api.openapi.controller.DailySaleControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.interfaces.DailySaleService;
 import com.springfood.infrastructure.service.PDFDailySaleServiceImpl;
@@ -20,8 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/statistics")
-@SecurityRequirement(name = "security_auth")
-public class DailySaleController {
+public class DailySaleController implements DailySaleControllerDoc {
 
     @Autowired
     private DailySaleService dailySaleService;

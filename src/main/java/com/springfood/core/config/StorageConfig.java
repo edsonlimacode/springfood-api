@@ -1,6 +1,7 @@
-package com.springfood.core.storage;
+package com.springfood.core.config;
 
 
+import com.springfood.core.properties.StorageProperties;
 import com.springfood.domain.interfaces.FileStorageService;
 import com.springfood.infrastructure.service.storage.LocalFileStorageService;
 import com.springfood.infrastructure.service.storage.S3FileStorageService;

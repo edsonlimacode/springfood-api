@@ -1,7 +1,7 @@
 package com.springfood.infrastructure.service.storage;
 
 
-import com.springfood.core.storage.StorageProperties;
+import com.springfood.core.properties.StorageProperties;
 import com.springfood.domain.interfaces.FileStorageService;
 import com.springfood.domain.model.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;

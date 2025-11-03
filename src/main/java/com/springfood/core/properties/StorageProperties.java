@@ -1,4 +1,4 @@
-package com.springfood.core.storage;
+package com.springfood.core.properties;
 
 
 import lombok.Getter;

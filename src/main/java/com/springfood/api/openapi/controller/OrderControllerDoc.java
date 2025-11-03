@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
@@ -24,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 @Tag(name = "Pedidos")
 public interface OrderControllerDoc {
 
-    @Operation(summary = "Registra um pedido")
+    @Operation(summary = "Registra um novo pedido")
     void create(@RequestBody(description = "Representação do modelo de criação de um pedido") OrderRequestDto orderRequestDto);
 
     @Operation(summary = "Busca pedidos com filtros")
@@ -33,6 +34,11 @@ public interface OrderControllerDoc {
     ResponseEntity<Page<OrderResumeResponseDto>> findAll(@Parameter(hidden = true) OrderFilters filters, @Parameter(hidden = true) Pageable pageable);
 
     @Operation(summary = "Busca um pedido por código")
-    ResponseEntity<OrderResponseDto> findByCode(String code);
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Sucesso"),
+            @ApiResponse(responseCode = "400", description = "Código do recurso inválido", content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "404", description = "Recurso não encontrada", content = @Content(schema = @Schema))
+    })
+    ResponseEntity<OrderResponseDto> findByCode(@Parameter(description = "Código do recurso") String code);
 
 }

@@ -4,6 +4,7 @@ package com.springfood.api.controller;
 import com.springfood.api.dto.restaurant.RestaurantRequestDto;
 import com.springfood.api.dto.restaurant.RestaurantResponseDto;
 import com.springfood.api.mapper.RestaurantMapper;
+import com.springfood.api.openapi.controller.RestaurantControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.exception.BadRequestException;
 import com.springfood.domain.exception.CityNotFoundException;
@@ -25,9 +26,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/restaurants")
-@SecurityRequirement(name = "security_auth")
-@Tag(name = "Restaurantes")
-public class RestaurantController {
+public class RestaurantController implements RestaurantControllerDoc {
 
     @Autowired
     private RestaurantService restaurantService;
