@@ -42,9 +42,9 @@ public class SpringDocConfig {
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("SpringShop API")
-                        .description("Spring shop sample application")
-                        .version("v0.0.1"))
+                .info(new Info().title("Food API")
+                        .description("API aberta para clientes e restaurantes")
+                        .version("v1.0.0"))
                 .tags(List.of(
                         new Tag().name("Grupos").description("Gerencia os grupos"),
                         new Tag().name("Restaurantes").description("Gerencia os restaurantes"),

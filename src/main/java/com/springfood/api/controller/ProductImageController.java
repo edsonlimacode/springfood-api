@@ -3,17 +3,17 @@ package com.springfood.api.controller;
 import com.springfood.api.dto.productImage.ProductImageRequestDto;
 import com.springfood.api.dto.productImage.ProductImageResponseDto;
 import com.springfood.api.mapper.ProductImageMapper;
+import com.springfood.api.openapi.controller.ProductImageControllerDoc;
 import com.springfood.core.security.CheckSecurity;
 import com.springfood.domain.exception.NotFoundException;
+import com.springfood.domain.interfaces.FileStorageService;
 import com.springfood.domain.model.FileUpload;
 import com.springfood.domain.model.Product;
 import com.springfood.domain.model.ProductImage;
 import com.springfood.domain.repository.ProductRepository;
 import com.springfood.domain.service.ProductImageService;
 import com.springfood.domain.service.ProductService;
-import com.springfood.domain.interfaces.FileStorageService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -23,14 +23,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.validation.Valid;
 import java.io.IOException;
 
 @RestController
 @RequestMapping("/restaurant/{restaurantId}/product/{productId}/image")
-@SecurityRequirement(name = "security_auth")
-@Tag(name = "Restaurantes")
-public class ProductImageController {
+public class ProductImageController implements ProductImageControllerDoc {
 
     @Autowired
     private ProductImageService productImageService;
@@ -48,7 +45,7 @@ public class ProductImageController {
     private ProductImageMapper productImageMapper;
 
     @CheckSecurity.Admin
-    @PostMapping("/upload")
+    @PutMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ProductImageResponseDto upload(@PathVariable("restaurantId") Long restaurantId,
                                           @PathVariable("productId") Long productId,
                                           @Valid ProductImageRequestDto productImageRequestDto) throws IOException {
