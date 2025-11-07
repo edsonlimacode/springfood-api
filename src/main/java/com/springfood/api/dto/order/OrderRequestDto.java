@@ -27,7 +27,6 @@ public class OrderRequestDto {
     @NotNull
     private AddressRequestDto address;
 
-    @Schema(example = "[{productId: 1, quantity: 2}, {productId: 2, quantity: 1}]")
     @NotNull
     @Valid
     @Size(min = 1)

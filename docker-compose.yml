@@ -1,0 +1,18 @@
+services:
+  app:
+    image: edsonlima95/springfood-api
+    container_name: springfood-api
+    build: .
+    ports:
+      - "8080:8080"
+    expose:
+      - 8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/api-food
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 12345
+    networks:
+      - edson-network
+networks:
+  edson-network:
+    external: true

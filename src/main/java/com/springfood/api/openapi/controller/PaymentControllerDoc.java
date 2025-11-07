@@ -25,8 +25,8 @@ public interface PaymentControllerDoc {
     @ApiResponses({@ApiResponse(responseCode = "201", description = "Cadastrado")})
     void save(@RequestBody(description = "Representação do modelo de um novo pagamento") PaymentRequestDto paymentRequestDto);
 
-    @Operation(summary = "Atualiza uma forma de pagamento")
-     ResponseEntity<PaymentResponseDto> update(@Parameter(name = "ID de um pagamento", example = "1") Long id,
+     @Operation(summary = "Atualiza uma forma de pagamento")
+     ResponseEntity<PaymentResponseDto> update(@Parameter(description = "ID de um pagamento", example = "1") Long id,
                                                      @RequestBody(description = "Representação do modelo de atualizar um pagamento")
                                                      PaymentRequestDto paymentRequestDto);
 
