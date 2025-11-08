@@ -11,6 +11,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/api-food
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 12345
+      SPRING_PROFILES_ACTIVE: development
     networks:
       - edson-network
 networks:
