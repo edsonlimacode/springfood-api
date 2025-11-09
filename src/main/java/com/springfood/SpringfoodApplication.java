@@ -21,8 +21,6 @@ public class SpringfoodApplication {
     public static void main(String[] args) {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 
-        System.out.println("${TESTE}");
-
         // SpringApplication.run(SpringfoodApplication.class, args);
         var app = new SpringApplication(SpringfoodApplication.class);
         app.addListeners(new Base64ProtocolResolver());
