@@ -1,6 +1,6 @@
 services:
   app:
-    image: edsonlima95/springfood-api
+    image: edsonlima95/springfood-api:latest
     container_name: springfood-api
     build: .
     ports:

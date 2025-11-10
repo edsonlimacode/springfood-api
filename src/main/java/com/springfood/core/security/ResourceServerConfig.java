@@ -29,6 +29,7 @@ public class ResourceServerConfig {
         http.authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/restaurant/*/product/*/image").permitAll()
+                        .requestMatchers("/healthchecks").permitAll()
                         .requestMatchers("/login", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/v3/api-docs/**",
                                 "/swagger-ui/**",
