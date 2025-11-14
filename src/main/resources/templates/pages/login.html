@@ -59,7 +59,7 @@
 
 <body class="text-center">
 	<form class="form-signin" th:action="@{/login}" method="post">
-		<h1 class="h3 mb-3 font-weight-normal">Acesso à AlgaFood</h1>
+		<h1 class="h3 mb-3 font-weight-normal">Acesso à Springfood</h1>
 
 		<p class="alert alert-danger" th:if="${#bools.isTrue(param.error)}">
 			O e-mail ou senha não confere
@@ -71,11 +71,7 @@
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
-		<p class="mt-5 mb-3 text-muted">&copy; AlgaWorks</p>
+		<p class="mt-5 mb-3 text-muted">&copy; Springfood</p>
 	</form>
 </body>
 </html>
-<!-- 
-Template baseado em exemplo do Bootstrap:
-https://getbootstrap.com.br/docs/4.1/examples/sign-in/
- -->
