@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    password: ""
+    url: ""
+    username: ""
+  jpa:
+    format_sql: true
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  mail:
+    host: ""
+    password: ""
+    port: ""
+    properties:
+      mail:
+        smtp:
+          auth: ""
+          starttls:
+            enabled: ""
+            required: ""
+    username: ""
+foodapi:
+  jwt:
+    keystore:
+      jks-location: ""
+      keypair-alias: ""
+      password: ""
+  storage:
+    access-key: ""
+    access-key-secret: ""
+    bucket: ""
+    fold: ""
+    location-type: s3
+    region: ""
+  upload:
+    local: ""
+springdoc:
+  oAuthFlow:
+    authorizationUrl: ""
+    tokenUrl: ""
+  packagesToScan: ""
+  swagger-ui:
+    oauth:
+      client-authentication-method: ""
+      client-id: ""
+      client-secret: ""
+      use-basic-authentication-with-access-code-grant: ""
+      use-pkce-with-authorization-code-grant: ""
+    oauth2-redirect-url: ""
+    operationsSorter: ""
+    request-snippets-enabled: ""
+    tagsSorter: ""

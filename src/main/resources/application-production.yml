@@ -1,0 +1,51 @@
+spring:
+  datasource:
+    password: ""
+    url: ""
+    username: ""
+  jpa:
+    format_sql: false
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  mail:
+    host: smtp.gmail.com
+    password: ""
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enabled: true
+            required: true
+    username: ""
+foodapi:
+  jwt:
+    keystore:
+      jks-location: ""
+      keypair-alias: ""
+      password: ""
+  storage:
+    access-key: ""
+    access-key-secret: ""
+    bucket: ""
+    fold: restaurantes
+    location-type: s3
+    region: ""
+springdoc:
+  oAuthFlow:
+    authorizationUrl: http://springfood-load-balance-1255713105.us-east-1.elb.amazonaws.com/oauth2/authorize
+    tokenUrl: http://springfood-load-balance-1255713105.us-east-1.elb.amazonaws.com/oauth2/token
+  packagesToScan: com.springfood.api
+  swagger-ui:
+    oauth:
+      client-authentication-method: client_secret_basic
+      client-id: ""
+      client-secret: ""
+      use-basic-authentication-with-access-code-grant: true
+      use-pkce-with-authorization-code-grant: false
+    oauth2-redirect-url: http://springfood-load-balance-1255713105.us-east-1.elb.amazonaws.com/swagger-ui/oauth2-redirect.html
+    operationsSorter: method
+    request-snippets-enabled: false
+    tagsSorter: alpha

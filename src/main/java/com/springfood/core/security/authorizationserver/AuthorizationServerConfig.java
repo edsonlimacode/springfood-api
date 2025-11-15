@@ -171,6 +171,28 @@ public class AuthorizationServerConfig {
 
         JdbcRegisteredClientRepository jdbcRegisteredClientRepository = new JdbcRegisteredClientRepository(jdbcOperations);
         jdbcRegisteredClientRepository.save(foodapiWeb2);*/
+
+       /* RegisteredClient foodapiWeb = RegisteredClient
+                .withId("1")
+                .clientId("foodapi-web")
+                .clientSecret(passwordEncoder.encode(""))
+                .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .tokenSettings(TokenSettings.builder()
+                        .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
+                        .accessTokenTimeToLive(Duration.ofDays(1))
+                        .build())
+                .redirectUri("http://localhost:8080/authorized")
+                .redirectUri("http://localhost:8080/swagger-ui/oauth2-redirect.html")
+                .clientSettings(ClientSettings.builder()
+                        .requireAuthorizationConsent(false)
+                        .requireProofKey(true) //Ativa o PKCE
+                        .build())
+                .build();
+
+        JdbcRegisteredClientRepository jdbcRegisteredClientRepository = new JdbcRegisteredClientRepository(jdbcOperations);
+        jdbcRegisteredClientRepository.save(foodapiWeb);
+*/
         return new JdbcRegisteredClientRepository(jdbcOperations);
     }
 
