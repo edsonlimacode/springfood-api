@@ -172,7 +172,7 @@ public class AuthorizationServerConfig {
         JdbcRegisteredClientRepository jdbcRegisteredClientRepository = new JdbcRegisteredClientRepository(jdbcOperations);
         jdbcRegisteredClientRepository.save(foodapiWeb2);*/
 
-       /* RegisteredClient foodapiWeb = RegisteredClient
+        /*RegisteredClient foodapiWeb = RegisteredClient
                 .withId("1")
                 .clientId("foodapi-web")
                 .clientSecret(passwordEncoder.encode(""))
@@ -191,8 +191,8 @@ public class AuthorizationServerConfig {
                 .build();
 
         JdbcRegisteredClientRepository jdbcRegisteredClientRepository = new JdbcRegisteredClientRepository(jdbcOperations);
-        jdbcRegisteredClientRepository.save(foodapiWeb);
-*/
+        jdbcRegisteredClientRepository.save(foodapiWeb);*/
+
         return new JdbcRegisteredClientRepository(jdbcOperations);
     }
 
